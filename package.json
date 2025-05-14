@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/views/index.js"
+    "dev": "nodemon src/views/index.js",
+    "start": "node src/views/index.js"
   },
   "keywords": [],
   "author": "",
