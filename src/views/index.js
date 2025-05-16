@@ -9,6 +9,7 @@ const passport = require('passport');
 
 const {database} = require('./keys');
 const {PORT} = require('./config')
+const comandoRouter = require('../routes/sisris')
 //inicializations
 const app = express();
 require('../lib/passport');
@@ -50,6 +51,7 @@ app.use((req, res, next) => {
 app.use(require('../routes/index'));
 app.use(require('../routes/authentication'));
 app.use('/sisris', require('../routes/sisris'));
+app.use('/comando', comandoRouter);
 //Public
 app.use(express.static(path.join(__dirname, 'public')));
 //Start the server

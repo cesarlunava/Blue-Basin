@@ -24,6 +24,36 @@ router.post('/add', async (req, res) => {
   }
 });
 
+router.get('/api/relays', async (req, res) => {
+  const { controller_id } = req.query;
+
+  if (!controller_id) {
+    return res.status(400).json({error: 'controller_id requerido'});
+  }
+
+  try {
+    const [rows] = await pool.query(
+      'SELECT state FROM relays WHERE controller_id = ?',
+      [controller_id]
+    );
+  
+    if (rows.length === 0) {
+      return res.status(404).json({ error: 'No encontrado' });
+    }
+
+    const estados = [
+      !!rows[0].id, !!rows[0].id, !!rows[0].id, !!rows[0].id,
+      !!rows[0].id, !!rows[0].id, !!rows[0].id, !!rows[0].id
+    ];
+
+    res.json({ states: estados });
+  } catch (err) {
+    console.error('Error al consultar relays:', err);
+    res.status(500).json({ error: 'Error del servidor' });
+  }
+});
+    
+
 /*router.post('/add', async (req, res) => {
     const {on} = req.body;
     const newSISRI = {
