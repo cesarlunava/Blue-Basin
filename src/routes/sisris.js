@@ -13,7 +13,7 @@ router.post('/add', async (req, res) => {
   try {
     // Insertar en la tabla 'comandos' de la BD 'app_clickcrop'
     
-    await pool.query('UPDATE relays SET state = ? WHERE id = 1', [onoff]);
+    await pool.query('UPDATE relays SET state = ? WHERE controller_id = "MEGA2560/2025"', [onoff]);
     req.flash('success', 'Se ha registrado el comando correctamente');
     console.log('Comando ingresado:', onoff);
     //res.redirect('/add');
