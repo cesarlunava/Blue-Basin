@@ -1,19 +1,21 @@
 <div class="container p-4">
     <div class="row">
 
-        {{#each sisris}}
+        
             <div class="col-md-3">
                 <div class="card text-center">
                     <div class="card-body">
                         <a href="">
                             <h3 class="card-title text-uppercase">
-                                {{title}}
+                                <form action="/api-relay-state" method="GET">
+                                    <button>Oprima para sincronizar</button>
+                                </form>
                             </h3>
                         </a>
                     </div>
                 </div>
             </div>
-        {{/each}}
+        
 
     </div>
 </div>

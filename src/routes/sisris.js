@@ -4,35 +4,36 @@ const router = express.Router();
 const pool = require('../views/database');
 
 router.get('/add', (req, res) => {
-    res.render('links/add'); // renderiza el archivo 'add.hbs' alojado en la carpeta 'links' que contiene el forms
+    res.render('links/add'); 
 });
 
 router.post('/add', async (req, res) => {
-  const { onoff } = req.body; // recibimos el valor del botón presionado
-
-  try {   
+  const { onoff } = req.body; 
+  try { 
     await pool.query('UPDATE relays SET state = ? WHERE controller_id = "MEGA2560/2025"', [onoff]);
     req.flash('success', 'Se ha registrado el comando correctamente');
     console.log('Comando ingresado:', onoff);
-    res.redirect('links/add');
+    res.render('link/list');
   } catch (err) {
     console.error('Error al insertar comando:', err);
     req.flash('error', 'Hubo un problema al registrar el comando');
-    res.redirect('links/add');
   }
 });
 
-router.get('/api/relay-state', async (req, res) => {
-    const {controller_id} = req.query;
+router.get('/list', (req, res) => {
+  res.render('links/list');
+});
 
-    try {
-        // Consulta el estado actual del relé en la base de datos
-        const [resultado] = await pool.query('SELECT state FROM relays WHERE controller_id = ?', [controller_id]);
-        res.json(resultado[0]);
+router.get('/api-relay-state', async (req, res) => {
+    const estado = await pool.query('SELECT state FROM comandos WHERE controller_id = "MEGA2560/2025"');
+
+    try{
+      estadojson = res.json(estado[0]);
+      console.log(estadojson);
     } catch(err) {
       console.error('Error al consultar estado: ', err);
       res.status(500).json({error: 'Error al consultar estado' });
     }
-  });
+});
 
 module.exports = router;
