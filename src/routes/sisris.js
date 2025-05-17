@@ -23,21 +23,16 @@ router.post('/add', async (req, res) => {
 });
 
 router.get('/api/relay-state', async (req, res) => {
+    const {controller_id} = req.query;
+
     try {
         // Consulta el estado actual del relé en la base de datos
-        const result = await pool.query('SELECT state FROM relays WHERE controller_id = "MEGA2560/2025"');
-        
-        if (result && result.length > 0) {
-            // Devuelve solo el valor (1 o 0) sin formato JSON para simplificar el procesamiento en el ESP8266
-            res.send(result[0].state.toString());
-            console.log('ESP8266 consultó el estado:', result[0].state);
-        } else {
-            res.status(404).send('0'); // Si no hay datos, devuelve 0 (apagado) por defecto
-        }
-    } catch (err) {
-        console.error('Error al consultar estado para ESP8266:', err);
-        res.status(500).send('Error');
+        const [resultado] = await pool.query('SELECT state FROM relays WHERE controller_id = ?', [controller_id]);
+        res.json(resultado[0]);
+    } catch(err) {
+      console.error('Error al consultar estado: ', err);
+      res.status(500).json({error: 'Error al consultar estado' });
     }
-});
+  });
 
 module.exports = router;
