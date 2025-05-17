@@ -25,11 +25,10 @@ router.get('/list', (req, res) => {
 });
 
 router.get('/api-relay-state', async (req, res) => {
-    const estado = await pool.query('SELECT state FROM comandos WHERE controller_id = "MEGA2560/2025"');
-
     try{
-      estadojson = res.json(estado[0]);
-      console.log(estadojson);
+      const [estado] = await pool.query('SELECT state FROM comandos WHERE controller_id = "MEGA2560/2025"');
+      console.log('Estados enviado: ', estado[0]);
+      res.json(estado[0])
     } catch(err) {
       console.error('Error al consultar estado: ', err);
       res.status(500).json({error: 'Error al consultar estado' });
