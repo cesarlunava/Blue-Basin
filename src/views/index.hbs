@@ -1,0 +1,82 @@
+<style>
+header {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+
+nav.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 2;
+}
+
+.nav-left img {
+  height: 200px; 
+}
+
+.nav-right a button {
+  margin-left: 15px;
+  padding: 8px 16px;
+  background-color: transparent;
+  color: white;
+  border: 1px solid white;
+  cursor: pointer;
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  top: 40%;
+  transform: translateY(-40%);
+  color: white;
+}
+
+header video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.main-button {
+  padding: 14px 28px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: white;
+  color: black;
+  margin-top: 20px;
+}
+</style>
+<header>
+  <nav class="navbar">
+    <div class="nav-left">
+      <img src="/images/bblogo.png" alt="Logo">
+    </div>  
+    <div class="nav-right">
+      <a href="/auth"><button>Inicio</button></a>
+      <a href="/profile"><button>Perfil</button></a>
+    </div> 
+  </nav>
+
+  <div class="content">
+    <h1>Blue Basin</h1>
+    <h4>El futuro de la agricultura</h4>
+    <a href="/auth"><button class="main-button"><h4>Blue-Basin.app</h4></button></a>
+  </div>
+
+  <video autoplay muted loop aria-hidden="true" title="Video de fondo">
+    <source src="/images/gota.mp4" type="video/mp4" />
+  </video>
+</header>
