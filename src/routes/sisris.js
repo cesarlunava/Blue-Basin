@@ -19,6 +19,10 @@ router.post('/add', async (req, res) => {
   }
 });
 
+router.get('/sisrID', (req, res) => {
+  res.render('');
+})
+
 router.get('/api-relay-state', async (req, res) => {
     try{
       const estado = await pool.query('SELECT state FROM relays WHERE controller_id = "MEGA2560/2025"');
