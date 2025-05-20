@@ -13,6 +13,7 @@ router.post('/add', async (req, res) => {
     await pool.query('UPDATE relays SET state = ? WHERE controller_id = "MEGA2560/2025"', [onoff]);
     req.flash('success', 'Se ha registrado el comando correctamente');
     console.log('Comando ingresado:', onoff);
+    res.redirect('/sisris/add')
   } catch (err) {
     console.error('Error al insertar comando:', err);
     req.flash('error', 'Hubo un problema al registrar el comando');
@@ -20,8 +21,9 @@ router.post('/add', async (req, res) => {
 });
 
 router.get('/sisrID', (req, res) => {
-  res.render('');
+  res.render('links/formservice');
 })
+
 
 router.get('/api-relay-state', async (req, res) => {
     try{
