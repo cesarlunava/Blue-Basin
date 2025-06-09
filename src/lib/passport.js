@@ -43,33 +43,11 @@ passport.use('local.signup', new LocalStrategy({
     return done(null, newUsuario);
     }));
 
-    passport.serializeUser((usuario, done) => {
-        done(null, usuario.id)
+    passport.serializeUser((user, done) => {
+        done(null, user.id)
     });
 
     passport.deserializeUser(async (id, done) => {
-        const rows = await pool.query('SELECT * FROM usuarios WHERE id=?', [id]);
+        const [rows] = await pool.query('SELECT * FROM usuarios WHERE id=?', [id]);
         done(null, rows[0]);
     });
-    /*try{
-    const { email } = req.body;
-    //Verifica si el usuario ya existe
-    const usuarioExiste = await pool.query('SELECT * FROM usuarios WHERE nombre = ? OR email =?', [nombre, email]);
-    if(usuarioExiste.length > 0) {
-        return done(null, false, req.flash('message', 'El usuario ya existe'));
-    }
-    const newUsuario = {
-        nombre,
-        password,
-        email
-    };
-    newUsuario.password = await helpers.encryptPassword(password);
-    const result = await pool.query('INSERT INTO usuarios SET ?', [newUsuario]);
-    //se puede cambiar
-    newUsuario.id = result.insertId;
-    return done(null, newUsuario);
-} catch(error) {
-    return done(error, null);
-}
-}));*/
-

@@ -1,21 +1,26 @@
+{{> navigation}}
 <div class="container p-4">
     <div class="row">
-
         
-            <div class="col-md-3">
-                <div class="card text-center">
-                    <div class="card-body">
-                        <a href="">
-                            <h3 class="card-title text-uppercase">
-                                <form action="/api-relay-state" method="GET">
-                                    <button>Oprima para sincronizar</button>
-                                </form>
-                            </h3>
-                        </a>
-                    </div>
+        {{#each sisri}}
+            <div class="card text-center">
+                <div class="card_body">
+                    <h3 class="card-title text-uppercase">
+                        {{nombre}}
+                    </h3>
+                    <p class="m-2">{{ descripcion}}</p>
+                    <p>{{timeago created_at}}</p>
+                    <a href="/sisris/panel/{{id}}" class="btn btn-success">Entrar</a>
+                    <a href="/sisris/edit/{{id}}" class="btn btn-success">Editar</a>
                 </div>
             </div>
-        
+        {{else}}
+            <div class="col-md-4 mx-auto">
+                <div class="card card-body text-center">
+                    <p>No cuenta con ningún servicio</p>
+                </div>
+            </div>
+        {{/each}}
 
     </div>
 </div>
