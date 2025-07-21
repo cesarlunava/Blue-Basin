@@ -32,3 +32,5 @@ ADD PRIMARY KEY (id);
 
 ALTER TABLE sisris MODIFY id INT(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT = 1;
 
+INSERT INTO `sistemas` (`id`, `clavedemodelo`, `nombre`, `descripcion`, `usuario_id`, `created_at`, `estatus`) 
+VALUES (NULL, '', '[NOMBRE] Edite su servicio', '[DESCRIPCION] Edite su servicio', '30', current_timestamp(), 'Apagado');

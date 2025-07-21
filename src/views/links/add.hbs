@@ -1,18 +1,27 @@
-{{> navigation}}
-<h5><center>{{links.nombre}}</center></h5>
 <div class="container p-4">
     <div class="row">
         <div class="col-md-4 mx-auto">
             <div class="card">
                 <div class="card-body">
-                        <h6><center>Estado actual: {{links.estatus}}</center></h6>
-            
+                    <h4>Estatus actual: {{links.estatus}}</h4>          
                         <form action="/sisris/panel/{{links.id}}" method="POST">
                             <button type="submit" name="estatus" value= "Encendido" class="btn btn-primary m-4"><center>Encender</center></button>
                             <button type="submit" name="estatus" value= "Apagado" class="btn btn-primary m-4"><center>Apagar</center></button> 
                         </form> 
                 </div>
+                <a href="/sisris/invitar/{{links.id}}" role="button">+ Añadir colaboradores</a>
             </div>
         </div>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <h5>Nitrógeno: {{links.n}}</h5>
+        <h5>Fósforo: {{links.p}}</h5>
+        <h5>Potasio: {{links.k}}</h5>
+        <h5>Conductividad Eléctrica: {{links.ec}}</h5>
+        <h5>pH: {{links.ph}}</h5>
+        <h5>Temperatura: {{links.temp}}</h5>
+        <h5>Humedad: {{links.hum}}</h5>
     </div>
 </div>

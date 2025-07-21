@@ -1,4 +1,4 @@
-{{> navigation}}
+
 <div class="container p-4">
     <div class="row">
         
@@ -18,6 +18,20 @@
             <div class="col-md-4 mx-auto">
                 <div class="card card-body text-center">
                     <p>No cuenta con ningún servicio</p>
+                </div>
+            </div>
+        {{/each}}
+
+        {{#each invitado_a}}
+            <div class="card text-center">
+                <div class="card_body">
+                    <h3 class="card-title text-uppercase">
+                        {{nombre}}
+                    </h3>
+                    <p class="m-2">{{descripcion}}</p>
+                    <p>{{timeago created_at}}</p>
+                    <h5>Cuenta con una invitación a este servicio</h5>
+                    <a href="/sisris/panel/{{id}}" class="btn btn-success">Entrar</a>
                 </div>
             </div>
         {{/each}}

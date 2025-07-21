@@ -53,6 +53,6 @@ app.use('/sisris', require('../routes/sisris'));
 //Public
 app.use(express.static(path.join(__dirname, 'public')));
 //Start the server
-app.listen(app.get('port'), () => {
+app.listen(app.get('port'), '0.0.0.0', () => {
     console.log('Server on port', app.get('port'));
 });

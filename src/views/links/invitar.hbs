@@ -1,0 +1,38 @@
+<div class="container p-4">
+    <div class="row">
+        <div class="col-md-4 mx-auto">
+            <div class="card">
+                <div class="card-body">
+                    {{#if usuario}}
+                    <h4>Ingrese los datos del colaborador al que desea invitar a {{links.nombre}}</h4>
+                    <form action="/sisris/invitar/{{links.id}}" method="POST">
+                        <div class="form-group">
+                            <input type="text" name="receptor" class="form-control" placeholder="Usuario del Colaborador" autofocus="true">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="receptor_apellido" rows="2" class="form-control" placeholder="Apellido del Colaborador">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="receptor_email" rows="2" class="form-control" placeholder="Correo del Colaborador">
+                        </div>
+                        <input type="hidden" name="permisos" id="permisosInput" value="">
+                        <div class="form-group">
+                            <h5><center>¿Quiere otorgar Permiso de Riego?</center></h5>
+                            <center><button type="button" class="btn btn-primary m-4" onclick="setPermiso(1)"><center>SÍ</center></button>
+                            <button type="button" class="btn btn-primary m-4" onclick="setPermiso(0)"><center>NO</center></button></center>
+                        </div>
+                        <script>
+                            function setPermiso(valor){
+                                document.getElementById('permisosInput').value = valor;
+                            }
+                        </script>
+                        <div class="form-group">
+                            <button class="btn btn-success btn-block" type="submit">Invitar Colaborador</button>
+                        </div>
+                    </form>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
