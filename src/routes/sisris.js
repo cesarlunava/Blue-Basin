@@ -2,25 +2,26 @@ const express = require('express');
 const router = express.Router();
 const {isLoggedIn, isNotLoggedIn} = require('../lib/logueado');
 const pool = require('../views/database');
-//const bodyParser = require('body-parser');
+const keys = require('../views/keys');
+const fs = require('fs');
+const path = require('path');
+const rawBodyMiddleware = express.raw({ type: 'image/jpeg', limit: '5mb' });
 
-router.get('/panel/:id', isLoggedIn, async(req, res) => {
+router.get('/panel/:id', async(req, res) => { //isLoggedIn
   const {id} = req.params;
   const [links] = await pool.query('SELECT * FROM sistemas WHERE id = ?', [id]);
   console.log(links[0]);
   res.render('links/add', {links: links[0]}); 
 });
 
-//router.use(bodyParser.urlencoded({ extended: false }));
-
 router.post('/receive', async (req, res) => {
-  const { id, clavedemodelo, temp, hum} = req.body;
-  console.log(id, clavedemodelo, temp, hum);
+  const { id, clavedemodelo, temp, hum, n, p, k, ec, ph, soil_temp, soil_hum} = req.body;
+  console.log(id, clavedemodelo, temp, hum, n, p, k, ec, ph, soil_temp, soil_hum);
   try {
     const [[{clavedemodelo: dbClaveDeModelo}]] = await pool.query('SELECT clavedemodelo FROM sistemas WHERE id = ?', [id]);
     if (clavedemodelo === dbClaveDeModelo) {
-      await pool.query('UPDATE sistemas SET temp=?, hum=? WHERE id = ? AND clavedemodelo = ?', 
-        [temp, hum, id, clavedemodelo]);
+      await pool.query('UPDATE sistemas SET temp=?, hum=?, n=?, p=?, k=?, ec=?, ph=?, soil_temp=?, soil_hum=? WHERE id = ? AND clavedemodelo = ?', 
+        [temp, hum, n, p, k, ec, ph, soil_temp, soil_hum, id, clavedemodelo]);
       return res.send(" Datos actualizados");
     } else {
       return res.status(403).send(" Clave de modelo no coincide");
@@ -31,11 +32,31 @@ router.post('/receive', async (req, res) => {
   }
 });
 
+router.post("/upload", rawBodyMiddleware, (req, res) => {
+  const filePath = path.join(__dirname, "../public/last.jpg");
+  fs.writeFileSync(filePath, req.body);
+  console.log("Imagen recibida y guardada en last.jpg");
+  res.send("OK");
+});
 
-router.post('/panel/:id', isLoggedIn, async (req, res) => {
+router.get("/last.jpg", (req, res) => {
+  const filePath = path.join(__dirname, "../public/last.jpg");
+  if (fs.existsSync(filePath)) {
+    res.sendFile(filePath);
+  } else {
+    res.status(404).send("No image yet");
+  }
+});
+
+router.post('/panel/:id', async (req, res) => { //isLoggedIn
   const { id } = req.params;
   const {estatus} = req.body;
-  try {
+  await pool.query('UPDATE sistemas SET estatus = ? WHERE id = 1', [estatus]);
+  res.redirect('/sisris/panel/1');
+
+  
+
+  /*try {
     const [[{usuario_id}]] = await pool.query('SELECT usuario_id FROM sistemas WHERE id = ?', [id]);
     const [[{permisos} = {}]] = await pool.query('SELECT permisos FROM invitaciones WHERE sisri_id = ?', [id]);
     if(usuario_id === req.user.id || permisos === 1){
@@ -50,7 +71,7 @@ router.post('/panel/:id', isLoggedIn, async (req, res) => {
   } catch (err) {
     console.error('Error al insertar comando:', err);
     req.flash('error', 'Hubo un problema al registrar el comando');
-  }
+  }*/
 });
 
 router.get('/edit/:id', isLoggedIn, async (req, res) => {
@@ -183,21 +204,25 @@ router.post('/aceptar/:id', async (req, res) => {
   res.redirect('/profile');
 });
 
-router.get('/api-relay-state/:id', isNotLoggedIn, async (req, res) => { 
-  try{
-    const {id} = req.params;
-    const clavedemodelo = req.headers['x-api-key'];
-    const auth = await pool.query('SELECT id FROM sistemas WHERE id = ? AND clavedemodelo = ?', [id, clavedemodelo]);
-    if (auth.length === 0){
-      return res.status(401).json({error: 'Credenciales incorrectas'});
+router.post('/api-relay-state', async (req, res) => { 
+  try {
+    const { id, clavedemodelo } = req.body;
+    const estado = await pool.query(
+      'SELECT estatus FROM sistemas WHERE id = ? AND clavedemodelo = ?',
+      [id, clavedemodelo]
+    );
+
+    if (estado.length === 0) {
+      return res.status(401).json({ error: 'Credenciales incorrectas' });
     }
-    const estado = await pool.query('SELECT estatus FROM sistemas WHERE id = ? AND clavedemodelo = ?', [id, clavedemodelo]);
-    console.log('Estado enviado: ', estado);
+
+    console.log('Estado enviado: ', estado[0]);
     res.json(estado[0]);
-  } catch(err) {
-      console.error('Error al consultar estado: ', err);
-      res.status(500).json({error: 'Error al consultar estado' });
-    }
+
+  } catch (err) {
+    console.error('Error al consultar estado: ', err);
+    res.status(500).json({ error: 'Error al consultar estado' });
+  }
 });
 
 module.exports = router;

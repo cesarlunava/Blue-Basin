@@ -24,12 +24,12 @@ router.post('/login', isNotLoggedIn, (req, res, next) => {
     })(req, res, next);
 });
 
-router.get('/profile', isLoggedIn, async(req, res) => {
-    const [rows] = await pool.query('SELECT nombre, apellido, email FROM usuarios WHERE id = ?', [req.user.id]);
+router.get('/profile', /*isLoggedIn,*/ async(req, res) => {
+    /*const [rows] = await pool.query('SELECT nombre, apellido, email FROM usuarios WHERE id = ?', [req.user.id]);
     const {nombre, apellido, email} = rows[0];
     const [invitaciones] = await pool.query(
-        'SELECT * FROM invitaciones WHERE receptor = ? AND receptor_apellido = ? AND receptor_email = ?', [nombre, apellido, email]);
-    res.render('../views/profile', {invitaciones});
+        'SELECT * FROM invitaciones WHERE receptor = ? AND receptor_apellido = ? AND receptor_email = ?', [nombre, apellido, email]);*/
+    res.render('../views/profile'/*, {invitaciones}*/);
 });        
 
 router.get('/logout', isLoggedIn, (req, res) => {

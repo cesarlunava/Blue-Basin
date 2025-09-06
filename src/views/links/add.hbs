@@ -1,27 +1,53 @@
 <div class="container p-4">
     <div class="row">
-        <div class="col-md-4 mx-auto">
+        <div class=" mx-auto">
+            <h1>{{links.nombre}}</h1>
             <div class="card">
                 <div class="card-body">
-                    <h4>Estatus actual: {{links.estatus}}</h4>          
-                        <form action="/sisris/panel/{{links.id}}" method="POST">
-                            <button type="submit" name="estatus" value= "Encendido" class="btn btn-primary m-4"><center>Encender</center></button>
-                            <button type="submit" name="estatus" value= "Apagado" class="btn btn-primary m-4"><center>Apagar</center></button> 
+                    <center>
+                    <h4>Irrigation Statuts: {{links.estatus}}</h4>
+                    <p>Apagado: OFF</p>
+                    <p>Encendido: ON</p>         
+                        <form action="/sisris/panel/1{{!links.id}}" method="POST">
+                            <button type="submit" name="estatus" value= "Encendido" class="btn btn-primary m-4"><center>ON</center></button>
+                            <button type="submit" name="estatus" value= "Apagado" class="btn btn-primary m-4"><center>OFF</center></button> 
                         </form> 
+                    </center>    
                 </div>
-                <a href="/sisris/invitar/{{links.id}}" role="button">+ Añadir colaboradores</a>
+                {{!<a href="/sisris/invitar/{{links.id" role="button">+ Añadir colaboradores</a>}}
+            </div>      
+            <div>
+                <h1>Live Stream</h1>
+                <p>The blue light means the irrigation is on!</p>
+                    <img src="/sisris/last.jpg" id="cam" width="320"/>
+                    <script>
+                        setInterval(() => {
+                            document.getElementById("cam").src = "/sisris/last.jpg?t=" + Date.now();
+                        }, 500);
+                    </script>
             </div>
         </div>
     </div>
 </div>
 <div class="card">
+<p>The following is the variety of data we can measure in a real crop.</p>
+<p>These come from the last database record</p>
     <div class="card-body">
-        <h5>Nitrógeno: {{links.n}}</h5>
-        <h5>Fósforo: {{links.p}}</h5>
-        <h5>Potasio: {{links.k}}</h5>
-        <h5>Conductividad Eléctrica: {{links.ec}}</h5>
-        <h5>pH: {{links.ph}}</h5>
-        <h5>Temperatura: {{links.temp}}</h5>
-        <h5>Humedad: {{links.hum}}</h5>
+        <center><h2>Soil Data</h2></center>
+        <h5>Nitrogen: {{links.n}}</h5>
+        <h5>Phosphorous: {{links.p}}</h5>
+        <h5>Potasium: {{links.k}}</h5>
+        <h5>Electric Conductivity: {{links.ec}}</h5>
+        <h5>Potential of Hydrogen (pH): {{links.ph}}</h5>
+        <h5>Temperature: {{links.soil_temp}}°C</h5>
+        <h5>Humidity: {{links.soil_hum}}</h5>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <center><h2>Weather Data</h2></center>
+        <h5>Solar Radiation: 6.2 kWh/m^2</h5>
+        <h5>Temperature: {{links.temp}}°C</h5>
+        <h5>Wind Humidity: {{links.hum}}</h5>
     </div>
 </div>
