@@ -31,24 +31,24 @@
     </div>
 </div>
 <div class="card">
-<p>The following is the variety of data we can measure in a real crop.</p>
-<p>These come from the last database record</p>
+<p>The following is the variety of data we can measure in a real crop to provide the information</p>
+<p>that our Model of Smart Recommendations needs to calculate the best irrigation schedule</p>
     <div class="card-body">
         <center><h2>Soil Data</h2></center>
-        <h5>Nitrogen: 1{{!links.n}}</h5>
-        <h5>Phosphorous: 1{{!links.p}}</h5>
-        <h5>Potasium: 7{{!links.k}}</h5>
-        <h5>Electric Conductivity: 2428{{!links.ec}}</h5>
-        <h5>Potential of Hydrogen (pH): 15.87{{!links.ph}}</h5>
-        <h5>Temperature: 21.1{{!links.soil_temp}}°C</h5>
-        <h5>Humidity: 35.0{{!links.soil_hum}}</h5>
+        <h5>Nitrogen: {{links.n}} mg/Kg</h5>
+        <h5>Phosphorous: {{links.p}} mh/Kg</h5>
+        <h5>Potasium: {{links.k}}</h5>
+        <h5>Electric Conductivity: {{links.ec}} microSiemens(μS)</h5>
+        <h5>Potential of Hydrogen (pH): {{links.ph}}</h5>
+        <h5>Temperature: {{links.soil_temp}}°C</h5>
+        <h5>Humidity: {{links.soil_hum}}</h5>
     </div>
 </div>
 <div class="card">
     <div class="card-body">
         <center><h2>Weather Data</h2></center>
         <h5>Solar Radiation: 6.2 kWh/m^2</h5>
-        <h5>Wind Temperature: 22.9{{!links.temp}}°C</h5>
-        <h5>Wind Humidity: 41.82{{!links.hum}}</h5>
+        <h5>Wind Temperature: {{links.temp}}°C</h5>
+        <h5>Wind Humidity: {{links.hum}}</h5>
     </div>
 </div>
