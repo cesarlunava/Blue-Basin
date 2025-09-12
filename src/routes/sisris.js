@@ -14,6 +14,15 @@ router.get('/panel/:id', async(req, res) => { //isLoggedIn
   res.render('links/add', {links: links[0]}); 
 });
 
+router.get('/data', async (req, res) => {
+  try{
+    const [data] = await pool.query('SELECT id, temp, hum, n, p, k, ec, ph, soil_temp, soil_hum FROM sistemas WHERE id = 1');
+    res.json(data);
+  } catch{
+    res.status(500).json({error: "Error al obtener datos"});
+  }
+});
+
 router.post('/receive', async (req, res) => {
   const { id, clavedemodelo, temp, hum, n, p, k, ec, ph, soil_temp, soil_hum} = req.body;
   console.log(id, clavedemodelo, temp, hum, n, p, k, ec, ph, soil_temp, soil_hum);

@@ -2,24 +2,22 @@
     <div class="row">
         <div class=" mx-auto">
             <h1>{{links.nombre}}</h1>
-            <h6>Small scale of MVP: {{links.descripcion}}</h6>
+            <h6>Muestra a pequeña escala del producto mínimo viable nivel industria</h6>
             <div class="card">
                 <div class="card-body">
                     <center>
-                    <h4>Irrigation Statuts: {{links.estatus}}</h4>
-                    <p>Apagado: OFF</p>
-                    <p>Encendido: ON</p>         
+                    <h4>Estatus de Riego: {{links.estatus}}</h4>         
                         <form action="/sisris/panel/1{{!links.id}}" method="POST">
-                            <button type="submit" name="estatus" value= "Encendido" class="btn btn-primary m-4"><center>ON</center></button>
-                            <button type="submit" name="estatus" value= "Apagado" class="btn btn-primary m-4"><center>OFF</center></button> 
+                            <button type="submit" name="estatus" value= "Encendido" class="btn btn-primary m-4"><center>Encender</center></button>
+                            <button type="submit" name="estatus" value= "Apagado" class="btn btn-primary m-4"><center>Apagado</center></button> 
                         </form> 
                     </center>    
                 </div>
                 {{!<a href="/sisris/invitar/{{links.id" role="button">+ Añadir colaboradores</a>}}
             </div>      
             <div>
-                <h1>Live Stream</h1>
-                <p>The blue light means the irrigation is on!</p>
+                <h1>En Vivo</h1>
+                <p>La pequeña luz azul significa que el riego está encendido</p>
                     <img src="/sisris/last.jpg" id="cam" width="320"/>
                     <script>
                         setInterval(() => {
@@ -31,23 +29,24 @@
     </div>
 </div>
 <div class="card">
-<p>The following is the variety of data we can measure in a real crop to provide the information that our Model of Smart Recommendations needs to calculate the best irrigation schedule</p>
+<p>A continuación están los datos de cultivo que podemos medir para alimentar nuestra inteligencia
+    artificial para que pueda calcular diversas variables y deducir el mejor horario de riego</p>
     <div class="card-body">
-        <center><h2>Soil Data</h2></center>
-        <h5>Nitrogen: {{links.n}} mg/Kg</h5>
-        <h5>Phosphorous: {{links.p}} mg/Kg</h5>
-        <h5>Potasium: {{links.k}} mg/Kg</h5>
-        <h5>Electric Conductivity: {{links.ec}} microSiemens(μS)</h5>
-        <h5>Potential of Hydrogen (pH): {{links.ph}}</h5>
-        <h5>Temperature: {{links.soil_temp}}°C</h5>
-        <h5>Humidity: {{links.soil_hum}}</h5>
+        <center><h2>Datos de Tierra</h2></center>
+        <h5>Nitrógeno: {{links.n}} mg/Kg</h5>
+        <h5>Fósforo: {{links.p}} mg/Kg</h5>
+        <h5>Potasio: {{links.k}} mg/Kg</h5>
+        <h5>Conductividad Eléctrica: {{links.ec}} microSiemens(μS)</h5>
+        <h5>Potencial de Hidrógeno (pH): {{links.ph}}</h5>
+        <h5>Temperatura: {{links.soil_temp}}°C</h5>
+        <h5>Humedad: {{links.soil_hum}}</h5>
     </div>
 </div>
 <div class="card">
     <div class="card-body">
-        <center><h2>Weather Data</h2></center>
-        <h5>Solar Radiation: 6.2 kWh/m^2</h5>
-        <h5>Wind Temperature: {{links.temp}}°C</h5>
-        <h5>Wind Humidity: {{links.hum}}</h5>
+        <center><h2>Datos de Ambiente</h2></center>
+        <h5>Radiación Solar: *Nula</h5>
+        <h5>Temperatura del Aire: {{links.temp}}°C</h5>
+        <h5>Humedad del Aire: {{links.hum}}</h5>
     </div>
 </div>

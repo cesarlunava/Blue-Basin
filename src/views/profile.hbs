@@ -4,8 +4,8 @@
                 <div class="card text-center">
                     <div class="card-body">
                         
-                            <h3>Welcome{{!usuario.nombre}}!</h3>
-                            <h4>Visit the <a href="/sisris/panel/1">Blue Basin Prototype</a>!</h4>
+                            <h3>Bienvenido{{!usuario.nombre}}!</h3>
+                            <h4>Visite <a href="/sisris/panel/1">Blue Basin: Prototipo</a>!</h4>
                         
                     </div>
                 </div>
@@ -23,24 +23,24 @@
         </div>
     {{/each}}
     <div class="container">
-        <h1>Contact Us</h1>
-        <p>Share your email or phone number with us for a better communication!!</p>
+        <h1>Comuníquese con Nosotros</h1>
+        <p>Compartanos su correo o número de télefono para una mejor comunicación</p>
         <form target="_blank" action="https://formsubmit.co/e4aa9132c945d8c957a6ae25a11ce179" method="POST">
             <div class="form-group">
                 <div class="form-row">
                     <div class="col">
-                        <input type="text" name="name" class="form-control" placeholder="Complete Name or Enterprise" required {{!readonly}}>
+                        <input type="text" name="name" class="form-control" placeholder="Nombre Completo o Empresa" required {{!readonly}}>
                     </div>
                     <div class="col">
-                        <input type="email" name="email" class="form-control" placeholder="Email" required {{!readonly}}>
+                        <input type="email" name="email" class="form-control" placeholder="Correo Electrónico" required {{!readonly}}>
                     </div>
                 </div>
             </div>
             <div class="form-group">
-                <textarea placeholder="Message" class="form-control" name="message" rows="5" required></textarea>
+                <textarea placeholder="Mensaje" class="form-control" name="message" rows="5" required></textarea>
             </div>
             
-            <button type="submit" class="btn btn-success btn-lg btn-block">Send</button>
+            <button type="submit" class="btn btn-success btn-lg btn-block">Enviar</button>
 
             <input type="hidden" name="_next" value="https://blue-basin1.up.railway.app/profile">
             <input type="hidden" name="_captcha" value="false">
