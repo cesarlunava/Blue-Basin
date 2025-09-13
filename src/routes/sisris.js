@@ -11,7 +11,8 @@ router.get('/panel/:id', async(req, res) => { //isLoggedIn
   const {id} = req.params;
   const [links] = await pool.query('SELECT * FROM sistemas WHERE id = ?', [id]);
   console.log(links[0]);
-  res.render('links/add', {links: links[0]}); 
+  const [irrigation] = await pool.query('SELECT * FROM irrigation_schedules ORDER BY id DESC LIMIT 1;');
+  res.render('links/add', {links: links[0], irrigation: irrigation[0]}); 
 });
 
 router.get('/data', async (req, res) => {

@@ -29,6 +29,17 @@
     </div>
 </div>
 <div class="card">
+    <div class="card-body">
+        <center><h2>Recomendaciones de Riego</h2></center>
+        <h5>Fecha del Riego: {irrigation.scheduled_date}</h5>
+        <h5>Cantidad de Agua: {{irrigation.water_amount_m3}}m3</h5>
+        <h5>Duración del Riego: {{irrigation.irrigation_duration_minutes}} minutos</h5>
+        <h5>Fase Fenológica: {{irrigation.phenological_phase}}</h5>
+        <h5>Coeficiente de Cultivo: {{irrigation.kc_factor}}</h5>
+        <h5>Predicción de Evapotranspiración: {{irrigation.predicted_eto}}</h5>
+    </div>
+</div>
+<div class="card">
 <p>A continuación están los datos de cultivo que podemos medir para alimentar nuestra inteligencia
     artificial para que pueda calcular diversas variables y deducir el mejor horario de riego</p>
     <div class="card-body">
@@ -47,6 +58,14 @@
         <center><h2>Datos de Ambiente</h2></center>
         <h5>Radiación Solar: *Nula</h5>
         <h5>Temperatura del Aire: {{links.temp}}°C</h5>
+        <h5>Humedad del Aire: {{links.hum}}</h5>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <center><h2>Variables Derivadas de Datos</h2></center>
+        <h5>Evapotranspiración: *Nula</h5>
+        <h5>Déficit de Presión de Vapor: {{links.temp}}°C</h5>
         <h5>Humedad del Aire: {{links.hum}}</h5>
     </div>
 </div>
